@@ -130,20 +130,32 @@
 
     <script>
         function calculate() {
-            const meters = parseFloat(
-                document.getElementById("meters").value
-            );
+    const meters = parseFloat(
+        document.getElementById("meters").value
+    );
 
-            if (isNaN(meters)) {
-                document.getElementById("angle").textContent = "--°";
-                return;
-            }
+    const angleElement = document.getElementById("angle");
 
-            const result = -0.24 * meters + 108;
+    if (isNaN(meters)) {
+        angleElement.textContent = "--°";
+        return;
+    }
 
-            document.getElementById("angle").textContent =
-                Math.round(result) + "°";
-        }
+    if (meters > 450) {
+        angleElement.textContent = "Too Far";
+        return;
+    }
+
+    if (meters < 100) {
+        angleElement.textContent = "Too Close";
+        return;
+    }
+
+    const result = -0.24 * meters + 108;
+
+    angleElement.textContent = Math.round(result) + "°";
+}
+
     </script>
 
 </body>
